@@ -1,0 +1,15 @@
+.card {
+  box-shadow: 5px 5px 5px lightgray;
+  cursor: pointer;
+  width: 100%;
+}
+
+.add-card {
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn-danger {
+  padding: 0 6px;
+  float: right;
+}
