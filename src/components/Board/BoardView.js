@@ -22,7 +22,6 @@ class BoardView extends React.Component {
 
   renderSwimLane = _swimlanes => {
     let lanes = _swimlanes.map(swimlane => {
-      console.log(swimlane);
       return (
         <React.Fragment>
           <SwimLaneContainer
@@ -47,7 +46,6 @@ class BoardView extends React.Component {
         </button>
       </React.Fragment>
     );
-    console.log(lanes);
     return lanes;
   };
 }

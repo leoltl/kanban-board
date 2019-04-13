@@ -6,7 +6,7 @@ class BoardContainer extends React.Component {
     super(props);
     this.state = {
       todos: null,
-      swimlanes: [{ swimlaneId: 1, title: "" }]
+      swimlanes: [{ swimlaneId: 0, title: "" }]
     };
   }
 
@@ -16,8 +16,8 @@ class BoardContainer extends React.Component {
     let swimlanes = window.localStorage.getItem("swimlanes");
     swimlanes = JSON.parse(swimlanes);
     if (swimlanes === null) {
-      this.updateLocalStorage([{ swimlaneId: 1, title: "" }], "swimlanes");
-      this.setState({ swimlanes: [{ swimlaneId: 1, title: "" }] });
+      this.updateLocalStorage([{ swimlaneId: 0, title: "" }], "swimlanes");
+      this.setState({ swimlanes: [{ swimlaneId: 0, title: "" }] });
     } else {
       this.setState({ todos: todos, swimlanes: swimlanes });
     }

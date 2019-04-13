@@ -7,7 +7,6 @@ class SwimLaneContainer extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <React.Fragment>
         <SwimLane
