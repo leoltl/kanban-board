@@ -19,6 +19,7 @@ class SwimLaneContainer extends React.Component {
           key={this.props.swimlaneId}
           handleInput={this.handleInput}
           handleSubmit={this.handleSubmit}
+          handleDeleteSwimlane={this.handleDeleteSwimlane}
         />
       </React.Fragment>
     );
@@ -39,6 +40,10 @@ class SwimLaneContainer extends React.Component {
 
   handleInput = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleDeleteSwimlane = id => {
+    this.props.removeSwimlane(id);
   };
 }
 

@@ -32,6 +32,7 @@ class BoardView extends React.Component {
             updateTask={this.props.updateTask}
             removeTask={this.props.removeTask}
             updateSwimlane={this.props.updateSwimlane}
+            removeSwimlane={this.props.removeSwimlane}
           />
         </React.Fragment>
       );

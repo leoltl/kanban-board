@@ -8,7 +8,7 @@ class SwimLane extends React.Component {
       <div className="SwimLane" key={this.props.swimlaneId}>
         <button
           className="btn btn-danger btn-small"
-          onClick={() => this.props.handleRemoveTask(this.props.task.id)}
+          onClick={() => this.props.handleDeleteSwimlane(this.props.swimlaneId)}
         >
           &times;
         </button>
@@ -43,7 +43,6 @@ class SwimLane extends React.Component {
   };
 
   createTaskPrompt = statusId => {
-    console.log(statusId);
     if (!statusId) {
       return (
         <li className="list-group-item">

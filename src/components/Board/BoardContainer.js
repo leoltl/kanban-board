@@ -34,6 +34,7 @@ class BoardContainer extends React.Component {
           updateTask={this.updateTask}
           removeTask={this.removeTask}
           updateSwimlane={this.updateSwimlane}
+          removeSwimlane={this.removeSwimlane}
         />
       </div>
     );
@@ -90,7 +91,6 @@ class BoardContainer extends React.Component {
   };
 
   updateSwimlane = newSwimlane => {
-    console.log(newSwimlane);
     let prevSwimlanes = this.state.swimlanes;
     let newSwimlanes = prevSwimlanes.map(swimlane => {
       if (swimlane.swimlaneId === newSwimlane.swimlaneId) {
@@ -104,6 +104,17 @@ class BoardContainer extends React.Component {
 
   updateLocalStorage = (data, key) => {
     window.localStorage.setItem(key, JSON.stringify(data));
+  };
+
+  removeSwimlane = id => {
+    if (this.state.swimlanes) {
+      let prevSwimlanes = this.state.swimlanes;
+      let newSwimlanes = prevSwimlanes.filter(
+        swimlane => swimlane.swimlaneId !== id
+      );
+      this.setState({ swimlanes: newSwimlanes });
+      this.updateLocalStorage(newSwimlanes, "swimlanes");
+    }
   };
 }
 
