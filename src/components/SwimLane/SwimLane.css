@@ -1,6 +1,8 @@
 .SwimLane {
   margin: 0 1em;
   width: 100%;
+  align-self: center;
+  height: 50px;
 }
 
 h3 {

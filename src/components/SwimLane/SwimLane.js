@@ -5,15 +5,33 @@ import "./SwimLane.css";
 class SwimLane extends React.Component {
   render() {
     return (
-      <div className="SwimLane" key={this.props.id}>
-        <h3>{this.props.title}</h3>
+      <div className="SwimLane" key={this.props.swimlaneId}>
+        <h3>{this.emptyTitle(this.props.title)}</h3>
         <ul className="list-group-flush">
           {this.returnTasksli(this.props.todos)}
-          {this.createTaskPrompt(this.props.id)}
+          {this.createTaskPrompt(this.props.swimlaneId)}
         </ul>
       </div>
     );
   }
+
+  emptyTitle = title => {
+    if (!title) {
+      return (
+        <React.Fragment>
+          <input
+            type="text"
+            name="title"
+            placeholder="Swimlane Name"
+            onChange={e => this.props.handleInput(e)}
+          />
+          <button onClick={this.props.handleSubmit}>Confirm</button>
+        </React.Fragment>
+      );
+    } else {
+      return title;
+    }
+  };
 
   createTaskPrompt = statusId => {
     if (!statusId) {
