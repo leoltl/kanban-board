@@ -25,7 +25,7 @@ class SwimLane extends React.Component {
     if (!title) {
       return (
         <React.Fragment>
-          <div class="newLane">
+          <div className="newLane">
             <input
               type="text"
               name="title"
@@ -33,7 +33,7 @@ class SwimLane extends React.Component {
               onChange={e => this.props.handleInput(e)}
             />
             <button
-              class="btn btn-success"
+              className="btn btn-success"
               type="submit"
               onClick={this.props.handleSubmit}
             >

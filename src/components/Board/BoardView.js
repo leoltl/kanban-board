@@ -1,6 +1,5 @@
 import React from "react";
 import SwimLaneContainer from "../SwimLane/SwimLaneContainer";
-import "./Board.css";
 
 class BoardView extends React.Component {
   render() {

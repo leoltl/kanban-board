@@ -51,7 +51,7 @@ class TaskCardContainer extends React.Component {
   };
 
   removeTask = id => {
-    console.log("remove click", id);
+    this.props.removeTask(id);
   };
 
   onInputChange = e => {
