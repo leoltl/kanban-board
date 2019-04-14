@@ -11,17 +11,7 @@ class SwimLane extends React.Component {
         onDragOver={e => this.props.onDragOver(e)}
         onDrop={e => this.props.onDrop(e)}
       >
-        <h3>
-          {this.emptyTitle(this.props.title)}
-          <button
-            className="btn btn-danger btn-small"
-            onClick={() =>
-              this.props.handleDeleteSwimlane(this.props.swimlaneId)
-            }
-          >
-            &times;
-          </button>
-        </h3>
+        <h3>{this.emptyTitle(this.props.title)}</h3>
 
         <ul className="list-group-flush">
           {this.returnTasksli(this.props.todos)}
@@ -39,7 +29,7 @@ class SwimLane extends React.Component {
             <input
               type="text"
               name="title"
-              placeholder="Type Swimlane Name"
+              placeholder="Enter Name"
               onChange={e => this.props.handleInput(e)}
             />
             <button
@@ -53,7 +43,19 @@ class SwimLane extends React.Component {
         </React.Fragment>
       );
     } else {
-      return title;
+      return (
+        <React.Fragment>
+          {title}
+          <button
+            className="btn btn-danger btn-small btn-title"
+            onClick={() =>
+              this.props.handleDeleteSwimlane(this.props.swimlaneId)
+            }
+          >
+            &times;
+          </button>
+        </React.Fragment>
+      );
     }
   };
 

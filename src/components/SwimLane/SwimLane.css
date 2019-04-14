@@ -22,4 +22,14 @@ h3 {
 
 .newLane {
   display: flex;
+  width: 100%;
+}
+
+.newLane input {
+  width: 100%;
+  font-size: 20px;
+}
+.newLane button {
+  width: 100px;
+  padding: 5px;
 }
