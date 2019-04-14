@@ -1,5 +1,7 @@
 import React from "react";
 import TaskCardContainer from "../TaskCard/TaskCardContainer";
+import SwimLaneTitle from "./SwimLaneTitle";
+import Hover from "../Hover/Hover";
 import "./SwimLane.css";
 
 class SwimLane extends React.Component {
@@ -11,7 +13,20 @@ class SwimLane extends React.Component {
         onDragOver={e => this.props.onDragOver(e)}
         onDrop={e => this.props.onDrop(e)}
       >
-        <h3>{this.emptyTitle(this.props.title)}</h3>
+        <h3>
+          <Hover
+            render={hovering => (
+              <SwimLaneTitle
+                title={this.props.title}
+                handleInput={this.props.handleInput}
+                handleSubmit={this.props.handleSubmit}
+                handleDeleteSwimlane={this.props.handleDeleteSwimlane}
+                swimlaneId={this.props.swimlaneId}
+                hovering={hovering}
+              />
+            )}
+          />
+        </h3>
 
         <ul className="list-group-flush">
           {this.returnTasksli(this.props.todos)}
@@ -20,44 +35,6 @@ class SwimLane extends React.Component {
       </div>
     );
   }
-
-  emptyTitle = title => {
-    if (!title) {
-      return (
-        <React.Fragment>
-          <div className="newLane">
-            <input
-              type="text"
-              name="title"
-              placeholder="Enter Name"
-              onChange={e => this.props.handleInput(e)}
-            />
-            <button
-              className="btn btn-success"
-              type="submit"
-              onClick={this.props.handleSubmit}
-            >
-              Confirm
-            </button>
-          </div>
-        </React.Fragment>
-      );
-    } else {
-      return (
-        <React.Fragment>
-          {title}
-          <button
-            className="btn btn-danger btn-small btn-title"
-            onClick={() =>
-              this.props.handleDeleteSwimlane(this.props.swimlaneId)
-            }
-          >
-            &times;
-          </button>
-        </React.Fragment>
-      );
-    }
-  };
 
   createTaskPrompt = statusId => {
     if (!statusId) {

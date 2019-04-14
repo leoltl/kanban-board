@@ -13,6 +13,7 @@ h3 {
   padding-bottom: 5px;
   padding: 10px;
   width: 100%;
+  cursor: pointer;
 }
 
 .create-button {

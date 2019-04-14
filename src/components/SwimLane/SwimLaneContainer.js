@@ -36,7 +36,6 @@ class SwimLaneContainer extends React.Component {
 
   onDragOver = e => {
     e.preventDefault();
-    console.log("dragged Over");
   };
 
   filterTasks = tasks => {
