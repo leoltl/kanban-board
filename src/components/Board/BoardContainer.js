@@ -59,9 +59,11 @@ class BoardContainer extends React.Component {
   };
 
   updateTask = newTask => {
+    console.log("updateTask called", newTask);
     if (this.state.todos) {
       let prevTodos = this.state.todos;
       let newTodos = prevTodos.map(task => {
+        console.log(task, prevTodos);
         if (task.id === newTask.id) {
           return newTask;
         }

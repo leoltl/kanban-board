@@ -1,44 +1,42 @@
 import React from "react";
 import "./TaskCard.css";
 
-class TaskCard extends React.Component {
-  render() {
-    return this.renderTaskHelper(this.props.task);
-  }
+const TaskCard_fun = props => {
+  let { title, description, assignedTo, id } = props.task;
+  let {
+    hovering,
+    onDragStart,
+    handleRemoveTask,
+    handleInput,
+    handleSaveTask,
+    editTask,
+    edit
+  } = props;
 
-  renderTaskHelper = task => {
-    if (task.title || task.description || task.assignedTo) {
-      return this.validTask(task, this.props.hovering);
-    } else {
-      return this.emptyTask();
-    }
-  };
-
-  validTask = (task, hovering) => {
-    return (
-      <div
-        className={hovering ? "card bg-warning" : "card"}
-        draggable
-        onDragStart={e => this.props.onDragStart(e)}
-      >
-        <div className="card-body">
-          <button
-            className="btn btn-danger btn-small"
-            onClick={() => this.props.handleRemoveTask(this.props.task.id)}
-          >
-            &times;
-          </button>
-          <h5 className="card-title">Title: {task.title}</h5>
-          <p className="card-text">Description: {task.description}</p>
-          <p className="card-text">
-            <small className="text-muted">Assigned To: {task.assignedTo}</small>
-          </p>
-        </div>
+  const validTask = (
+    <div
+      className={hovering ? "card bg-light" : "card"}
+      draggable
+      onDragStart={e => onDragStart(e)}
+      onClick={() => editTask()}
+    >
+      <div className="card-body">
+        <button
+          className="btn btn-danger btn-small"
+          onClick={() => handleRemoveTask(id)}
+        >
+          &times;
+        </button>
+        <h5 className="card-title">Title: {title}</h5>
+        <p className="card-text">Description: {description}</p>
+        <p className="card-text">
+          <small className="text-muted">Assigned To: {assignedTo}</small>
+        </p>
       </div>
-    );
-  };
+    </div>
+  );
 
-  emptyTask = () => (
+  const EditTask = (
     <div className="card">
       <div className="card-body">
         <h4>Create New Task</h4>
@@ -47,7 +45,8 @@ class TaskCard extends React.Component {
             type="text"
             name="title"
             placeholder="Title"
-            onChange={e => this.props.handleInput(e)}
+            onChange={e => handleInput(e)}
+            value={title}
           />
         </h5>
         <p className="card-text">
@@ -55,7 +54,8 @@ class TaskCard extends React.Component {
             type="text"
             name="description"
             placeholder="Description"
-            onChange={e => this.props.handleInput(e)}
+            onChange={e => handleInput(e)}
+            value={description}
           />
         </p>
         <p className="card-text">
@@ -64,25 +64,22 @@ class TaskCard extends React.Component {
               type="text"
               name="assignedTo"
               placeholder="Assign To"
-              onChange={e => this.props.handleInput(e)}
+              onChange={e => handleInput(e)}
+              value={assignedTo}
             />
           </small>
         </p>
         <input
-          onClick={this.props.handleSaveTask}
+          onClick={handleSaveTask}
           className="btn btn-primary"
           type="submit"
           value="Save"
         />
-        <button
-          className="btn btn-light"
-          onClick={() => this.props.handleRemoveTask(this.props.task.id)}
-        >
-          Cancel
-        </button>
       </div>
     </div>
   );
-}
 
-export default TaskCard;
+  return <React.Fragment>{edit ? EditTask : validTask}</React.Fragment>;
+};
+
+export default TaskCard_fun;

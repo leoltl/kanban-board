@@ -3,44 +3,61 @@ import TaskCard from "./TaskCard";
 import Hover from "../Hover/Hover";
 
 class TaskCardContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { id: this.props.task.id, status: this.props.task.status };
+  componentDidMount() {
+    this.setState({ task: this.props.task, edit: false });
   }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps !== this.props) {
+  //     this.setState({
+  //       task: this.props.task
+  //     });
+  //   }
+  // }
 
   render() {
-    return (
-      <Hover
-        render={hovering => (
-          <TaskCard
-            task={this.props.task}
-            handleInput={this.onInputChange}
-            handleSaveTask={this.saveTask}
-            handleRemoveTask={this.removeTask}
-            hovering={hovering}
-            onDragStart={this.onDragStart}
-          />
-        )}
-      />
-    );
+    if (this.state) {
+      return (
+        <Hover
+          render={hovering => (
+            <TaskCard
+              task={this.state.task}
+              handleInput={this.onInputChange}
+              handleSaveTask={this.saveTask}
+              handleRemoveTask={this.removeTask}
+              hovering={hovering}
+              onDragStart={this.onDragStart}
+              edit={this.state.edit}
+              editTask={this.editTask}
+            />
+          )}
+        />
+      );
+    }
+    return null;
   }
 
   onDragStart = e => {
     e.dataTransfer.setData("taskId", this.props.task.id);
-    console.log(this.props.task);
+  };
+
+  editTask = () => {
+    this.setState({ edit: true });
   };
 
   saveTask = () => {
-    this.props.updateTask(this.state);
+    let savedTask = this.state.task;
+    this.props.updateTask(savedTask);
+    this.setState({ edit: false });
   };
 
   removeTask = id => {
     console.log("remove click", id);
-    this.props.removeTask(id);
   };
 
   onInputChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    let prevTaskDetail = this.state.task;
+    prevTaskDetail = { ...prevTaskDetail, [e.target.name]: e.target.value };
+    this.setState({ task: prevTaskDetail });
   };
 }
 

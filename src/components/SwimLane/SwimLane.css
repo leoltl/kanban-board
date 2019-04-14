@@ -4,6 +4,7 @@
   width: 100%;
   min-height: 500px;
   height: 100%;
+  box-sizing: border-box;
 }
 
 h3 {
@@ -17,4 +18,8 @@ h3 {
 .create-button {
   max-width: 250px;
   padding: 20px;
+}
+
+.newLane {
+  display: flex;
 }

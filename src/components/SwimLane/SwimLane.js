@@ -35,15 +35,21 @@ class SwimLane extends React.Component {
     if (!title) {
       return (
         <React.Fragment>
-          <input
-            type="text"
-            name="title"
-            placeholder="Type Swimlane Name"
-            onChange={e => this.props.handleInput(e)}
-          />
-          <button type="submit" onClick={this.props.handleSubmit}>
-            Confirm
-          </button>
+          <div class="newLane">
+            <input
+              type="text"
+              name="title"
+              placeholder="Type Swimlane Name"
+              onChange={e => this.props.handleInput(e)}
+            />
+            <button
+              class="btn btn-success"
+              type="submit"
+              onClick={this.props.handleSubmit}
+            >
+              Confirm
+            </button>
+          </div>
         </React.Fragment>
       );
     } else {
