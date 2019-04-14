@@ -27,7 +27,6 @@ class BoardContainer extends React.Component {
   }
 
   render() {
-    console.log(this.state.todos);
     return (
       <div className="d-flex mt-4 swimlanes">
         <BoardView

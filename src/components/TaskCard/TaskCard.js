@@ -21,12 +21,16 @@ const TaskCard_fun = props => {
       onClick={() => editTask()}
     >
       <div className="card-body">
-        <button
-          className="btn btn-danger btn-small"
-          onClick={() => handleRemoveTask(id)}
-        >
-          &times;
-        </button>
+        {hovering ? (
+          <button
+            className="btn btn-danger btn-small"
+            onClick={() => handleRemoveTask(id)}
+            onMouseOver={e => e.stopPropagation()}
+            onMouseOut={e => e.stopPropagation()}
+          >
+            &times;
+          </button>
+        ) : null}
         <h5 className="card-title">Title: {title}</h5>
         <p className="card-text">Description: {description}</p>
         <p className="card-text">
