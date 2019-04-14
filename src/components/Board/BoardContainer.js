@@ -15,9 +15,12 @@ class BoardContainer extends React.Component {
     todos = JSON.parse(todos);
     let swimlanes = window.localStorage.getItem("swimlanes");
     swimlanes = JSON.parse(swimlanes);
-    if (swimlanes === null) {
+    if (swimlanes === null || swimlanes.length === 0) {
       this.updateLocalStorage([{ swimlaneId: 0, title: "" }], "swimlanes");
-      this.setState({ swimlanes: [{ swimlaneId: 0, title: "" }] });
+      this.setState({
+        todos: todos,
+        swimlanes: [{ swimlaneId: 0, title: "" }]
+      });
     } else {
       this.setState({ todos: todos, swimlanes: swimlanes });
     }
@@ -80,9 +83,7 @@ class BoardContainer extends React.Component {
 
   createSwimlane = () => {
     if (this.state.swimlanes) {
-      let statusMaxId = this.state.swimlanes
-        .map(swimlane => swimlane.swimlaneId)
-        .reduce((max, cur) => Math.max(max, cur));
+      let statusMaxId = this.findMaxSwimlaneStatusId();
       const newSwimlane = { swimlaneId: statusMaxId + 1, title: "" };
       const newSwimlanes = [...this.state.swimlanes, newSwimlane];
       this.setState({ swimlanes: newSwimlanes });
@@ -108,13 +109,24 @@ class BoardContainer extends React.Component {
 
   removeSwimlane = id => {
     if (this.state.swimlanes) {
-      let prevSwimlanes = this.state.swimlanes;
-      let newSwimlanes = prevSwimlanes.filter(
-        swimlane => swimlane.swimlaneId !== id
-      );
-      this.setState({ swimlanes: newSwimlanes });
-      this.updateLocalStorage(newSwimlanes, "swimlanes");
+      let statusMaxId = this.findMaxSwimlaneStatusId();
+      if (id === statusMaxId) {
+        let prevSwimlanes = this.state.swimlanes;
+        let newSwimlanes = prevSwimlanes.filter(
+          swimlane => swimlane.swimlaneId !== id
+        );
+        this.setState({ swimlanes: newSwimlanes });
+        this.updateLocalStorage(newSwimlanes, "swimlanes");
+      } else {
+        console.error("You can only delete the latest Swimlane");
+      }
     }
+  };
+
+  findMaxSwimlaneStatusId = () => {
+    return this.state.swimlanes
+      .map(swimlane => swimlane.swimlaneId)
+      .reduce((max, cur) => Math.max(max, cur));
   };
 }
 

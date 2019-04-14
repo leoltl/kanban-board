@@ -11,7 +11,7 @@ class BoardView extends React.Component {
     return (
       <React.Fragment>
         <button
-          className="btn btn-success SwimLane"
+          className="btn btn-success create-button"
           onClick={this.props.createSwimlane}
         >
           + Create New Lanes
@@ -39,12 +39,14 @@ class BoardView extends React.Component {
     });
     lanes.push(
       <React.Fragment>
-        <button
-          className="btn btn-success SwimLane"
-          onClick={this.props.createSwimlane}
-        >
-          + Create New Lanes
-        </button>
+        <div className="SwimLane">
+          <button
+            className="btn btn-success create-button"
+            onClick={this.props.createSwimlane}
+          >
+            + Create New Lanes
+          </button>
+        </div>
       </React.Fragment>
     );
     return lanes;

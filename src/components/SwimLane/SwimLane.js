@@ -5,14 +5,23 @@ import "./SwimLane.css";
 class SwimLane extends React.Component {
   render() {
     return (
-      <div className="SwimLane" key={this.props.swimlaneId}>
-        <button
-          className="btn btn-danger btn-small"
-          onClick={() => this.props.handleDeleteSwimlane(this.props.swimlaneId)}
-        >
-          &times;
-        </button>
-        <h3>{this.emptyTitle(this.props.title)}</h3>
+      <div
+        className="SwimLane"
+        key={this.props.swimlaneId}
+        onDragOver={e => this.props.onDragOver(e)}
+        onDrop={e => this.props.onDrop(e)}
+      >
+        <h3>
+          {this.emptyTitle(this.props.title)}
+          <button
+            className="btn btn-danger btn-small"
+            onClick={() =>
+              this.props.handleDeleteSwimlane(this.props.swimlaneId)
+            }
+          >
+            &times;
+          </button>
+        </h3>
 
         <ul className="list-group-flush">
           {this.returnTasksli(this.props.todos)}

@@ -20,10 +20,24 @@ class SwimLaneContainer extends React.Component {
           handleInput={this.handleInput}
           handleSubmit={this.handleSubmit}
           handleDeleteSwimlane={this.handleDeleteSwimlane}
+          onDragOver={this.onDragOver}
+          onDrop={this.onDrop}
         />
       </React.Fragment>
     );
   }
+
+  onDrop = e => {
+    let id = e.dataTransfer.getData("taskId");
+    let taskToUpdate = this.props.todos.find(task => task.id === parseInt(id));
+    taskToUpdate.status = this.props.swimlaneId;
+    this.props.updateTask(taskToUpdate);
+  };
+
+  onDragOver = e => {
+    e.preventDefault();
+    console.log("dragged Over");
+  };
 
   filterTasks = tasks => {
     if (tasks) {

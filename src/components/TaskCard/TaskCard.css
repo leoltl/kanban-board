@@ -4,6 +4,14 @@
   width: 100%;
 }
 
+.swimlanes {
+  width: 100%;
+}
+
+.d-flex {
+  align-content: space-around;
+}
+
 .add-card {
   text-align: center;
   cursor: pointer;

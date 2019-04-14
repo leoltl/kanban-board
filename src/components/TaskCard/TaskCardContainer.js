@@ -1,5 +1,6 @@
 import React from "react";
 import TaskCard from "./TaskCard";
+import Hover from "../Hover/Hover";
 
 class TaskCardContainer extends React.Component {
   constructor(props) {
@@ -9,14 +10,26 @@ class TaskCardContainer extends React.Component {
 
   render() {
     return (
-      <TaskCard
-        task={this.props.task}
-        handleInput={this.onInputChange}
-        handleSaveTask={this.saveTask}
-        handleRemoveTask={this.removeTask}
+      <Hover
+        render={hovering => (
+          <TaskCard
+            task={this.props.task}
+            handleInput={this.onInputChange}
+            handleSaveTask={this.saveTask}
+            handleRemoveTask={this.removeTask}
+            hovering={hovering}
+            onDragStart={this.onDragStart}
+          />
+        )}
       />
     );
   }
+
+  onDragStart = e => {
+    e.dataTransfer.setData("taskId", this.props.task.id);
+    console.log(this.props.task);
+  };
+
   saveTask = () => {
     this.props.updateTask(this.state);
   };

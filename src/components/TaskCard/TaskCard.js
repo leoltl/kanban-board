@@ -8,29 +8,35 @@ class TaskCard extends React.Component {
 
   renderTaskHelper = task => {
     if (task.title || task.description || task.assignedTo) {
-      return this.validTask(task);
+      return this.validTask(task, this.props.hovering);
     } else {
       return this.emptyTask();
     }
   };
 
-  validTask = task => (
-    <div className="card">
-      <div className="card-body">
-        <button
-          className="btn btn-danger btn-small"
-          onClick={() => this.props.handleRemoveTask(this.props.task.id)}
-        >
-          &times;
-        </button>
-        <h5 className="card-title">Title: {task.title}</h5>
-        <p className="card-text">Description: {task.description}</p>
-        <p className="card-text">
-          <small className="text-muted">Assigned To: {task.assignedTo}</small>
-        </p>
+  validTask = (task, hovering) => {
+    return (
+      <div
+        className={hovering ? "card bg-warning" : "card"}
+        draggable
+        onDragStart={e => this.props.onDragStart(e)}
+      >
+        <div className="card-body">
+          <button
+            className="btn btn-danger btn-small"
+            onClick={() => this.props.handleRemoveTask(this.props.task.id)}
+          >
+            &times;
+          </button>
+          <h5 className="card-title">Title: {task.title}</h5>
+          <p className="card-text">Description: {task.description}</p>
+          <p className="card-text">
+            <small className="text-muted">Assigned To: {task.assignedTo}</small>
+          </p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   emptyTask = () => (
     <div className="card">
